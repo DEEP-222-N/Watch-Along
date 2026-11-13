@@ -76,7 +76,6 @@ Fill in your Supabase project details:
 VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-publishable-key
 VITE_LIVE_EPOCH=1793491200
-VITE_ICE_SERVERS=
 ```
 
 ### 4. Start the dev server
