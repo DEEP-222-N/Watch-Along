@@ -86,25 +86,8 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 🌐 Deploying to Vercel
-
-Since Dream Stand is a client-side React SPA powered by Supabase Backend-as-a-Service, **you can deploy the entire frontend directly to Vercel without a custom Node.js server!**
-
-### Step-by-Step Vercel Deployment:
-
-1. Push your repository to **GitHub**.
-2. Go to your [Vercel Dashboard](https://vercel.com/dashboard) and click **"Add New Project"** → **Import**.
-3. Select your `dream-stand` repository.
-4. Framework Preset will auto-detect **Vite**.
-5. Under **Environment Variables**, add:
-   - `VITE_SUPABASE_URL` = *(Your Supabase URL)*
-   - `VITE_SUPABASE_PUBLISHABLE_KEY` = *(Your Supabase Anon/Publishable Key)*
-   - `VITE_LIVE_EPOCH` = `1793491200` *(Optional)*
-6. Click **Deploy**.
-
-> **Note on Client-side Routing**: [`vercel.json`](./vercel.json) is already included with `{ "rewrites": [{ "source": "/(.*)", "destination": "/" }] }` to ensure deep links (like `/party/:id` or `/login`) work smoothly upon browser refresh.
-
----
+## 🌐 Deployed Link
+1. Go to your [Vercel link](https://dreamstand-three.vercel.app/)
 
 ## 🧪 How to Test in 3 Minutes
 
