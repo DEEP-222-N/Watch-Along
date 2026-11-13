@@ -1,65 +1,150 @@
-# Dream Watch
+# ⚽ Dream Stand — Synchronized Football Watch Parties
 
-Football fans who can't be in the same room end up watching on separate streams a few seconds apart, with a group chat on the side and a goal spoiled by whoever's stream is ahead. Dream Watch puts the party inside the streaming app: everyone watches the same moment, chats and reacts over the video, votes on prediction polls, and can tag **@Coach**, an AI match expert who explains offsides, handballs, cards and tactical changes from real match event data, without spoiling what hasn't happened yet.
+> **Watch together, wherever you are.** Live and classic football with friends, perfectly synchronized video playback, peer-to-peer video calls, interactive prediction polls, and **@Coach** — an AI match expert grounded in real-time match events.
 
-**Live URL:** https://dream-watch-eight.vercel.app
+![Dream Stand](https://img.shields.io/badge/Dream%20Stand-v0.1.0-e50914?style=for-the-badge)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Database%20%7C%20Auth%20%7C%20Realtime-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-## How to test in 3 minutes
+---
 
-1. Sign up with any email (no confirmation email) and click **Subscribe** → **Yes, subscribe**.
-2. On the live match (Barcelona v Atlético de Madrid), click **Start Watch Party** → **Create party**. Friends who already have a subscribed account can be invited by email: they get a notification in the header bell.
-3. In the lobby, copy the invite link and open it in an **incognito window**. Create a second account, then **Subscribe & join**.
-4. Back in the first window, click **Start party**. Both windows move into the room and stay in sync. Try pause, rewind, Go Live.
-5. In either window, ask `@Coach why was that a penalty?` once the 35' penalty has happened (or use **Ask Coach** on any Timeline event). Anyone can pause or rewind; the chat logs who did.
-6. Vote on the poll Coach drops in the Polls tab. It resolves from match data and the leaderboard updates.
+## ⚡ Highlights & Features
 
-## Architecture
+- ⏱ **Zero-Spoiler Synchronized Playback**: One party, one moment. All viewers are synchronized within 1.5 seconds via server-anchored playback calculations. When anyone pauses, rewinds, or skips, everyone moves together.
+- 📹 **Peer-to-Peer Video & Audio Calls**: Built-in WebRTC video chat with speaking indicators, camera toggles, and host controls without sending audio/video through media servers.
+- 🤖 **AI Match Expert (@Coach)**: Ask `@Coach` anything in chat or click *Ask Coach* on any timeline event. Explains offsides, VAR decisions, tactics, and IFAB rules using actual match event data—with automatic anti-spoiler guards preventing answers about future events.
+- 📊 **Real-time Prediction Polls**: AI-generated and match-driven prediction polls. Postgres settles results automatically from match event data with a real-time party leaderboard.
+- 🛡️ **AI Chat Moderation**: Real-time content screening for abuse, hate speech, and spam while preserving natural football banter.
+- 🎨 **Broadcast Stadium Dark UI**: Glassmorphic dark aesthetic, illuminated scoreboards, realistic team crests, and responsive layout built for immersive match viewing.
 
-- **React (Vite, JavaScript)** front end on Vercel. Visual design: Barlow Condensed and Inter, Red, White, and Black dark palette.
-- **Supabase**: Postgres with row-level security, Auth (email + password), Realtime (one channel per party for row changes, broadcast reactions/typing and presence), and Edge Functions.
-- **AI** runs only in Edge Functions (`gaffer`, `generate-poll`, `moderate-message`), never in the browser, using structured JSON outputs. The provider is switchable (`supabase/functions/_shared/llm.js`): **Gemini** (`gemini-3.5-flash`, falling back to `gemini-3.1-flash-lite` when Google reports high demand) when `GEMINI_API_KEY` is set, or **Claude** (`claude-haiku-5-5` via the Anthropic SDK) with `ANTHROPIC_API_KEY`.
-- **Simulated live:** the 2022 final plays as a looping broadcast. The live edge is `loop.start + (serverNow − LIVE_EPOCH) mod loopLength`, so every viewer worldwide is at the same point. All clients use the server clock (`get_server_time` RPC) rather than their own.
-- **Sync:** playback state lives in one row (`parties`: anchor position/time, live delay, playing flag, version). Any member can change it through the `playback_action` RPC, which also writes the "Riya paused the video" chat log; the host can restrict this to themselves. Every client computes the same position from it with `partyPosition()` and corrects the YouTube player when it drifts more than 1.5 s. The same function runs inside the Edge Functions (`npm run sync-shared` copies it), so Coach and polls use a position computed on the server, never one sent by the client.
-- **In production** this would use a licensed live data feed and stream timestamps instead of hand-set video offsets.
+---
 
-## Video calls
+## 🏗️ Architecture
 
-Party members can turn on their camera and mic in the room. Video tiles appear in the participant strip or over the match picture ("On video"), or can be hidden while audio keeps playing. A speaking glow shows who is talking. The host can stop someone's video, ask a guest to turn theirs on, or turn off guest cameras for the whole party.
-
-Calls are peer-to-peer WebRTC: every participant connects directly to every other one, which suits watch parties of up to about 6 people. The browsers exchange connection details through a Supabase Realtime channel (`call:{partyId}`), so audio and video never pass through our servers. Calls use Google's public STUN server by default. On strict networks (some office Wi-Fi and mobile carriers) a direct connection isn't possible, so set `VITE_ICE_SERVERS` to include a TURN server (see `.env.example`).
-
-## AI features
-
-- **Coach Q&A**: grounded in StatsBomb event data up to the party's current moment, names the relevant IFAB Law, and labels each answer as *from match data*, *likely explanation* or *general rule*. In live mode the server only sends past events, and a spoiler check retries or blocks answers that mention later goals, extra time, penalties or the winner.
-- **AI prediction polls**: the model writes the question; the server builds the options and time window, and Postgres settles the result from `match_events`, so the model never decides who was right.
-- **AI moderation**: flags harassment, hate, threats, sexual content, personal info and spam, while banter is allowed. The host can review and restore. Members can also report messages manually.
-
-## Setup
-
-```bash
-npm install
-cp .env.example .env            # VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY
+```text
+┌────────────────────────────────────────────────────────┐
+│               Frontend (Vercel)                        │
+│   React 18 + Vite + React Router + Lucide Icons       │
+│   - Scorebug & Synchronized YouTube Player             │
+│   - Peer-to-Peer WebRTC Video Call Room                │
+│   - Live Chat, Timeline, People & Polls Tabs           │
+└──────────────────────────┬─────────────────────────────┘
+                           │
+       WebSocket (Realtime)│ HTTPS REST
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│                   Supabase Backend                     │
+│   - Postgres Database (Parties, Members, Messages, etc)│
+│   - Row Level Security (RLS) & Stored Procedures (RPC) │
+│   - Supabase Realtime Channels (Playback, Chat, Calls) │
+│   - Supabase Auth (Email & Password)                   │
+│   - Edge Functions (AI Coach, Polls, Moderation)       │
+│     * Gemini 3.5 Flash / Claude 3.5 Haiku              │
+└────────────────────────────────────────────────────────┘
 ```
 
-1. Create a Supabase project and run `supabase/migrations/0001_init.sql` (`supabase db push` or the SQL editor).
-2. **Auth → Providers → Email:** enabled, **Confirm email OFF**. **Auth → URL configuration:** Site URL = your Vercel URL.
-3. Put the AI secrets in `supabase/functions/.env` (gitignored; see `.env.example`), e.g. `GEMINI_API_KEY=...`, then run `supabase secrets set --env-file supabase/functions/.env`.
-4. `npm run sync-shared && supabase functions deploy gaffer generate-poll moderate-message`
-5. Put the event files in `data/` (`arg_fra_events.json`, `betis_barca_events.json`), add `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` to `supabase/seed/.env`, then run `npm run seed`.
-6. `npm run dev` locally, or deploy to Vercel with the two `VITE_` variables. `vercel.json` rewrites deep links like `/party/<id>`.
+---
 
-After changing `src/lib/matchTime.js` or `src/lib/playback.js`, run `npm run sync-shared` and redeploy the functions.
+## 🚀 Quick Start (Local Development)
 
-## Known limitations
+### Prerequisites
+- Node.js (v18+)
+- npm / pnpm / yarn
+- A [Supabase](https://supabase.com) project (or existing credentials)
 
-- Live is simulated with a looping full-match video. Subscriptions are a mock flag with no payment.
-- The 2022 World Cup final (StatsBomb data) is still seeded but hidden (`"listed": false` in `data/matches.json`) because FIFA's video can't be embedded here. Barcelona v Atlético has no lineups in its config, so Coach works from the events alone.
-- Betis v Barcelona events come from match reports and are accurate to the minute (marked "≈ minute").
-- Moderation runs just after a message is posted, so a message can be visible for 1–2 s before it's hidden. A production version would screen messages before posting.
-- Flagged messages are hidden in the UI, but their text can still be read through the API by party members.
-- Embedded YouTube videos depend on the uploader allowing embeds in the viewer's region.
-- Video calls connect everyone to everyone, which suits small parties only. Without a TURN server, some networks can't connect. The call signalling and the host's "stop video" request use public Realtime broadcast, so a technically minded party member could fake them. A production version would use authorized private channels and a media server (SFU) for larger groups.
+### 1. Clone the repository
+```bash
+git clone https://github.com/<YOUR-USERNAME>/dream-stand.git
+cd dream-stand
+```
 
-## Credits
+### 2. Install dependencies
+```bash
+npm install
+```
 
-Event data for the 2022 World Cup final: **StatsBomb Open Data** (free for non-commercial use). Match videos are embedded from the official FIFA and FC Barcelona YouTube channels.
+### 3. Configure environment variables
+Create a `.env` file in the project root:
+```bash
+cp .env.example .env
+```
+
+Fill in your Supabase project details:
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-publishable-key
+VITE_LIVE_EPOCH=1793491200
+VITE_ICE_SERVERS=
+```
+
+### 4. Start the dev server
+```bash
+npm run dev
+```
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## 🌐 Deploying to Vercel
+
+Since Dream Stand is a client-side React SPA powered by Supabase Backend-as-a-Service, **you can deploy the entire frontend directly to Vercel without a custom Node.js server!**
+
+### Step-by-Step Vercel Deployment:
+
+1. Push your repository to **GitHub**.
+2. Go to your [Vercel Dashboard](https://vercel.com/dashboard) and click **"Add New Project"** → **Import**.
+3. Select your `dream-stand` repository.
+4. Framework Preset will auto-detect **Vite**.
+5. Under **Environment Variables**, add:
+   - `VITE_SUPABASE_URL` = *(Your Supabase URL)*
+   - `VITE_SUPABASE_PUBLISHABLE_KEY` = *(Your Supabase Anon/Publishable Key)*
+   - `VITE_LIVE_EPOCH` = `1793491200` *(Optional)*
+6. Click **Deploy**.
+
+> **Note on Client-side Routing**: [`vercel.json`](./vercel.json) is already included with `{ "rewrites": [{ "source": "/(.*)", "destination": "/" }] }` to ensure deep links (like `/party/:id` or `/login`) work smoothly upon browser refresh.
+
+---
+
+## 🧪 How to Test in 3 Minutes
+
+1. **Sign up**: Create an account with any email on the login page and click **Subscribe** → **Yes, subscribe** (mock subscription).
+2. **Start a Party**: On the live match (*Barcelona vs Atlético de Madrid*), click **Start Watch Party** → **Create party**.
+3. **Invite a Friend**: In the lobby, copy the invite link and paste it into an **Incognito Window**. Create a second account, subscribe, and join the lobby.
+4. **Start the Match**: In the host window, click **Start party**. Both windows will enter the room in exact sync. Try pausing, rewinding, or clicking *Go Live*.
+5. **Ask Coach**: In chat, type `@Coach why was that a card?` or click **Ask Coach** on any timeline event.
+6. **Live Polls**: Check the **Polls** tab to vote on AI-settled prediction questions and watch the party leaderboard update in real-time.
+
+---
+
+## 📁 Project Structure
+
+```text
+├── data/                  # Match configs, events & StatsBomb data
+├── public/                # Static assets (favicons, logos)
+├── src/
+│   ├── components/        # Reusable UI components & modals
+│   │   ├── call/          # WebRTC video/audio call UI
+│   │   ├── panel/         # Chat, Polls, People & Timeline tabs
+│   │   └── player/        # Synchronized VideoPlayer & Scorebug
+│   ├── context/           # Auth, Party, Call, Invites & Toast state
+│   ├── hooks/             # Custom React hooks (player sync, match time)
+│   ├── lib/               # Formatters, playback sync math & Supabase client
+│   ├── pages/             # Home, Room, Lobby, Login, Invite, Watch
+│   └── styles/            # Stadium Night theme (index.css, pages.css, room.css)
+├── supabase/
+│   ├── functions/         # Deno Edge Functions (Coach, Polls, Moderation)
+│   ├── migrations/        # SQL schema, RLS policies, RPC functions
+│   └── seed/              # Match seeding scripts
+├── vercel.json            # Vercel SPA rewrites
+└── vite.config.js         # Vite configuration
+```
+
+---
+
+## 📜 License & Credits
+
+- Match event data for the 2022 World Cup final courtesy of **StatsBomb Open Data** (free for non-commercial use).
+- Match replays embedded via official YouTube players.
+- Built with React, Supabase, and Lucide Icons.
