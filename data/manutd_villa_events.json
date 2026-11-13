@@ -1,0 +1,370 @@
+[
+ {
+  "id": "mav-001",
+  "seq": 1,
+  "period": 1,
+  "period_label": "1st half",
+  "clock": "1'",
+  "video_time": 12,
+  "video_time_hms": "0:00:12",
+  "approximate": true,
+  "type": "period_start",
+  "importance": "key",
+  "team": null,
+  "player": null,
+  "description": "Kick-off: 1st half begins at Old Trafford. Boxing Day clash — Man Utd vs Aston Villa",
+  "score_after": {
+   "Manchester United": 0,
+   "Aston Villa": 0
+  },
+  "stats_after": {
+   "Manchester United": {
+    "shots": 0,
+    "shots_on_target": 0,
+    "corners": 0,
+    "fouls": 0,
+    "offsides": 0,
+    "yellow_cards": 0
+   },
+   "Aston Villa": {
+    "shots": 0,
+    "shots_on_target": 0,
+    "corners": 0,
+    "fouls": 0,
+    "offsides": 0,
+    "yellow_cards": 0
+   }
+  },
+  "data": {}
+ },
+ {
+  "id": "mav-002",
+  "seq": 2,
+  "period": 1,
+  "period_label": "1st half",
+  "clock": "23'",
+  "video_time": 32,
+  "video_time_hms": "0:00:32",
+  "approximate": true,
+  "type": "goal",
+  "importance": "key",
+  "team": "Aston Villa",
+  "player": "Ollie Watkins",
+  "description": "GOAL! Ollie Watkins opens the scoring for Aston Villa. A clinical finish from the Villa striker puts the visitors ahead at Old Trafford. Score: Man Utd 0–1 Aston Villa",
+  "score_after": {
+   "Manchester United": 0,
+   "Aston Villa": 1
+  },
+  "stats_after": {
+   "Manchester United": {
+    "shots": 2,
+    "shots_on_target": 0,
+    "corners": 0,
+    "fouls": 2,
+    "offsides": 0,
+    "yellow_cards": 0
+   },
+   "Aston Villa": {
+    "shots": 3,
+    "shots_on_target": 1,
+    "corners": 1,
+    "fouls": 1,
+    "offsides": 0,
+    "yellow_cards": 0
+   }
+  },
+  "data": {
+   "body_part": "right foot",
+   "location": "inside the box",
+   "assist": "Leon Bailey",
+   "assist_type": "through ball"
+  }
+ },
+ {
+  "id": "mav-003",
+  "seq": 3,
+  "period": 1,
+  "period_label": "1st half",
+  "clock": "45'",
+  "video_time": 65,
+  "video_time_hms": "0:01:05",
+  "approximate": true,
+  "type": "goal",
+  "importance": "key",
+  "team": "Aston Villa",
+  "player": "John McGinn",
+  "description": "GOAL! John McGinn doubles Villa's lead just before half-time! A devastating blow for Man Utd going into the break. Score: Man Utd 0–2 Aston Villa",
+  "score_after": {
+   "Manchester United": 0,
+   "Aston Villa": 2
+  },
+  "stats_after": {
+   "Manchester United": {
+    "shots": 5,
+    "shots_on_target": 1,
+    "corners": 2,
+    "fouls": 5,
+    "offsides": 1,
+    "yellow_cards": 0
+   },
+   "Aston Villa": {
+    "shots": 5,
+    "shots_on_target": 2,
+    "corners": 3,
+    "fouls": 4,
+    "offsides": 0,
+    "yellow_cards": 1
+   }
+  },
+  "data": {
+   "body_part": "right foot",
+   "location": "top of the box",
+   "assist": "Ollie Watkins",
+   "assist_type": "pull back"
+  }
+ },
+ {
+  "id": "mav-004",
+  "seq": 4,
+  "period": 1,
+  "period_label": "1st half",
+  "clock": "45+2'",
+  "video_time": 88,
+  "video_time_hms": "0:01:28",
+  "approximate": true,
+  "type": "period_end",
+  "importance": "key",
+  "team": null,
+  "player": null,
+  "description": "Half time: Manchester United 0–2 Aston Villa. Shocking first half for the home side",
+  "score_after": {
+   "Manchester United": 0,
+   "Aston Villa": 2
+  },
+  "stats_after": {
+   "Manchester United": {
+    "shots": 5,
+    "shots_on_target": 1,
+    "corners": 2,
+    "fouls": 5,
+    "offsides": 1,
+    "yellow_cards": 0
+   },
+   "Aston Villa": {
+    "shots": 5,
+    "shots_on_target": 2,
+    "corners": 3,
+    "fouls": 4,
+    "offsides": 0,
+    "yellow_cards": 1
+   }
+  },
+  "data": {}
+ },
+ {
+  "id": "mav-005",
+  "seq": 5,
+  "period": 2,
+  "period_label": "2nd half",
+  "clock": "46'",
+  "video_time": 100,
+  "video_time_hms": "0:01:40",
+  "approximate": true,
+  "type": "period_start",
+  "importance": "key",
+  "team": null,
+  "player": null,
+  "description": "Kick-off: 2nd half begins. Man Utd must come from 2 goals down to stay in this",
+  "score_after": {
+   "Manchester United": 0,
+   "Aston Villa": 2
+  },
+  "stats_after": {
+   "Manchester United": {
+    "shots": 5,
+    "shots_on_target": 1,
+    "corners": 2,
+    "fouls": 5,
+    "offsides": 1,
+    "yellow_cards": 0
+   },
+   "Aston Villa": {
+    "shots": 5,
+    "shots_on_target": 2,
+    "corners": 3,
+    "fouls": 4,
+    "offsides": 0,
+    "yellow_cards": 1
+   }
+  },
+  "data": {}
+ },
+ {
+  "id": "mav-006",
+  "seq": 6,
+  "period": 2,
+  "period_label": "2nd half",
+  "clock": "76'",
+  "video_time": 120,
+  "video_time_hms": "0:02:00",
+  "approximate": true,
+  "type": "goal",
+  "importance": "key",
+  "team": "Manchester United",
+  "player": "Alejandro Garnacho",
+  "description": "GOAL! Garnacho pulls one back! The young Argentine gives Man Utd hope with a brilliant finish. The comeback is on! Score: Man Utd 1–2 Aston Villa",
+  "score_after": {
+   "Manchester United": 1,
+   "Aston Villa": 2
+  },
+  "stats_after": {
+   "Manchester United": {
+    "shots": 8,
+    "shots_on_target": 3,
+    "corners": 3,
+    "fouls": 7,
+    "offsides": 2,
+    "yellow_cards": 1
+   },
+   "Aston Villa": {
+    "shots": 7,
+    "shots_on_target": 3,
+    "corners": 5,
+    "fouls": 9,
+    "offsides": 1,
+    "yellow_cards": 2
+   }
+  },
+  "data": {
+   "body_part": "right foot",
+   "location": "inside the box",
+   "assist": "Marcus Rashford",
+   "assist_type": "pull back"
+  }
+ },
+ {
+  "id": "mav-007",
+  "seq": 7,
+  "period": 2,
+  "period_label": "2nd half",
+  "clock": "81'",
+  "video_time": 148,
+  "video_time_hms": "0:02:28",
+  "approximate": true,
+  "type": "goal",
+  "importance": "key",
+  "team": "Manchester United",
+  "player": "Alejandro Garnacho",
+  "description": "GOAL! GARNACHO AGAIN! He levels it at 2–2! Old Trafford is rocking! Incredible comeback from Man Utd. Score: Man Utd 2–2 Aston Villa",
+  "score_after": {
+   "Manchester United": 2,
+   "Aston Villa": 2
+  },
+  "stats_after": {
+   "Manchester United": {
+    "shots": 10,
+    "shots_on_target": 4,
+    "corners": 4,
+    "fouls": 9,
+    "offsides": 2,
+    "yellow_cards": 1
+   },
+   "Aston Villa": {
+    "shots": 8,
+    "shots_on_target": 3,
+    "corners": 6,
+    "fouls": 11,
+    "offsides": 1,
+    "yellow_cards": 3
+   }
+  },
+  "data": {
+   "body_part": "left foot",
+   "location": "inside the box",
+   "assist": "Bruno Fernandes",
+   "assist_type": "cross"
+  }
+ },
+ {
+  "id": "mav-008",
+  "seq": 8,
+  "period": 2,
+  "period_label": "2nd half",
+  "clock": "90+1'",
+  "video_time": 168,
+  "video_time_hms": "0:02:48",
+  "approximate": true,
+  "type": "goal",
+  "importance": "key",
+  "team": "Manchester United",
+  "player": "Rasmus Højlund",
+  "description": "GOAL! HOJLUND WINS IT IN INJURY TIME! The Danish striker scores his first Premier League goal to complete the most dramatic Boxing Day comeback! Score: Man Utd 3–2 Aston Villa",
+  "score_after": {
+   "Manchester United": 3,
+   "Aston Villa": 2
+  },
+  "stats_after": {
+   "Manchester United": {
+    "shots": 12,
+    "shots_on_target": 5,
+    "corners": 4,
+    "fouls": 11,
+    "offsides": 2,
+    "yellow_cards": 2
+   },
+   "Aston Villa": {
+    "shots": 11,
+    "shots_on_target": 4,
+    "corners": 7,
+    "fouls": 14,
+    "offsides": 1,
+    "yellow_cards": 3
+   }
+  },
+  "data": {
+   "body_part": "right foot",
+   "location": "inside the box",
+   "assist": "Alejandro Garnacho",
+   "assist_type": "pull back"
+  }
+ },
+ {
+  "id": "mav-009",
+  "seq": 9,
+  "period": 2,
+  "period_label": "2nd half",
+  "clock": "90+3'",
+  "video_time": 185,
+  "video_time_hms": "0:03:05",
+  "approximate": true,
+  "type": "period_end",
+  "importance": "key",
+  "team": null,
+  "player": null,
+  "description": "Full time: Manchester United 3–2 Aston Villa. What a Boxing Day comeback! From 0-2 down, Garnacho (2) and Hojlund secure the three points!",
+  "score_after": {
+   "Manchester United": 3,
+   "Aston Villa": 2
+  },
+  "stats_after": {
+   "Manchester United": {
+    "shots": 12,
+    "shots_on_target": 5,
+    "corners": 4,
+    "fouls": 11,
+    "offsides": 2,
+    "yellow_cards": 2
+   },
+   "Aston Villa": {
+    "shots": 11,
+    "shots_on_target": 4,
+    "corners": 7,
+    "fouls": 14,
+    "offsides": 1,
+    "yellow_cards": 3
+   }
+  },
+  "data": {}
+ }
+]
+
